@@ -1,0 +1,31 @@
+<h1>Languages</h1>
+
+<ul>
+  <% @resources.each do |resource| %>
+  <li class="resource-item">
+    <div class="resource-box">
+      <!-- Delete link styled as an X in the top-right corner -->
+      <div class="delete-link">
+        <%= form_with url: resource_path(resource), method: :delete do %>
+        <%= submit_tag 'X', data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
+
+      <!-- Language info (title and description) with edit icon next to title -->
+      <div class="resource-title">
+        <strong>
+          <%= link_to resource.title, resource.link, target: "_blank", rel: "noopener" %>
+        </strong>
+        <%= link_to '✏️', edit_resource_path(resource), class: 'edit-icon', title: 'Edit' %>
+      </div>
+
+
+      <!-- Icon link for show page -->
+      <div class="view-details-icon">
+        <%= link_to '▼', resource_path(resource), class: 'button' %>
+      </div>
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add New Language', new_resource_path %>
